@@ -1,7 +1,7 @@
 {
   "name": "login",
   "version": "0.0.0",
-  "license": "MIT",
+  "license": "The Unlicense",
   "scripts": {
     "ng": "ng",
     "start": "ng serve --host 0.0.0.0 --port 3000",
