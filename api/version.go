@@ -4,6 +4,8 @@ import (
 	"encoding/json"
 	"errors"
 	"net/http"
+
+	models "./models"
 )
 
 var versionHandler = http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
@@ -26,7 +28,7 @@ var versionHandler = http.HandlerFunc(func(w http.ResponseWriter, r *http.Reques
 	version, err := getVersion()
 	checkErr(err)
 
-	s := &Status{
+	s := &models.Status{
 		Authorized: true,
 		Version:    version,
 	}

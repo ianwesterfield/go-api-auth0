@@ -6,16 +6,18 @@ import (
 	"net/http"
 	"os"
 
+	models "./models"
+
 	"github.com/gorilla/handlers"
 	"github.com/gorilla/mux"
 	"github.com/rs/cors"
 )
 
-var configuration Configuration
+var configuration models.Configuration
 
 func main() {
 	// get configuration
-	file, err := os.Open("./main.config.json")
+	file, err := os.Open("./configuration/main.config.json")
 	checkErr(err)
 
 	decoder := json.NewDecoder(file)

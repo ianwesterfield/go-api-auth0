@@ -1,11 +1,11 @@
-package main
+package models
 
 // Configuration - Holds the configuration variables for this package.
 type Configuration struct {
-	Server ServerSettings
-	Db     DbSettings
 	Auth0  Auth0Settings
 	Cors   CorsSettings
+	Db     DbSettings
+	Server ServerSettings
 }
 
 // ServerSettings -
@@ -15,29 +15,23 @@ type ServerSettings struct {
 
 // DbSettings -
 type DbSettings struct {
-	Username string
-	Password string
-	Name     string
 	DbInfo   string
+	Name     string
+	Password string
+	Username string
 }
 
 // Auth0Settings -
 type Auth0Settings struct {
 	Audience    string
-	Issuer      string
 	Certificate string
+	Issuer      string
 }
 
 // CorsSettings -
 type CorsSettings struct {
 	AllowCredentials bool
-	Debug            bool
-	AllowedOrigins   []string
 	AllowedHeaders   []string
-}
-
-// Status -
-type Status struct {
-	Authorized bool `json:"authorized"`
-	Version    int  `json:"version"`
+	AllowedOrigins   []string
+	Debug            bool
 }
