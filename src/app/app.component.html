@@ -14,7 +14,7 @@
         Log Out
       </button>
       <button id="qsLogoutBtn" class="btn btn-primary my-2 my-sm-0" *ngIf="authService.isAuthenticated()"
-        (click)="getStatus()" type="button">
+        (click)="sendSupportMessage()" type="button">
         Get Status
       </button>
     </form>

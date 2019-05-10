@@ -2,21 +2,22 @@ package models
 
 // Configuration - Holds the configuration variables for this package.
 type Configuration struct {
-	Auth0  Auth0Settings
-	Cors   CorsSettings
-	Db     DbSettings
-	Server ServerSettings
+	Auth0  Auth0Settings  `json:"auth0,omitempty" bson:",omitempty"`
+	Cors   CorsSettings   `json:"cors,omitempty" bson:",omitempty"`
+	Db     DbSettings     `json:"db,omitempty" bson:",omitempty"`
+	Server ServerSettings `json:"server,omitempty" bson:",omitempty"`
 }
 
 // ServerSettings -
 type ServerSettings struct {
-	Port string
+	Port int
 }
 
 // DbSettings -
 type DbSettings struct {
-	DbInfo   string
-	Name     string
+	Dsn      string
+	Server   string
+	Database string
 	Password string
 	Username string
 }

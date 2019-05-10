@@ -4,18 +4,19 @@ import (
 	"database/sql"
 	"fmt"
 
-	_ "github.com/lib/pq"
+	_ "github.com/denisenkom/go-mssqldb"
 )
 
 func dbInit() {
+	var server = configuration.Db.Server
 	var user = configuration.Db.Username
 	var password = configuration.Db.Password
-	var dbname = configuration.Db.Name
-	configuration.Db.DbInfo = fmt.Sprintf("user=%s password=%s dbname=%s sslmode=disable", user, password, dbname)
+	var database = configuration.Db.Database
+	configuration.Db.Dsn = fmt.Sprintf("server=%s;user id=%s;password=%s;database=%s", server, user, password, database)
 }
 
 var dbQuery = func(query string) (*sql.Rows, error) {
-	db, err := sql.Open("postgres", configuration.Db.DbInfo)
+	db, err := sql.Open("sqlserver", configuration.Db.Dsn)
 	checkErr(err)
 	defer db.Close()
 	return db.Query(query)

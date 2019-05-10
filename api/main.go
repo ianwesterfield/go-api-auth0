@@ -6,6 +6,7 @@ import (
 	"net/http"
 	"os"
 
+	controllers "./controllers"
 	models "./models"
 
 	"github.com/gorilla/handlers"
@@ -29,7 +30,8 @@ func main() {
 
 	// setup router
 	r := mux.NewRouter()
-	r.Handle("/api/v1/version", versionHandler).Methods("GET")
+	s := r.PathPrefix("/api/v1/").Subrouter()
+	s.HandleFunc("/support", controllers.SendMessage).Methods("POST")
 
 	// secure all routes
 	securedRoutes := auth0(r)
@@ -47,7 +49,7 @@ func main() {
 	loggingHandler := handlers.LoggingHandler(os.Stdout, corsHandler)
 
 	// start listening
-	http.ListenAndServe(fmt.Sprintf(":%s", configuration.Server.Port), loggingHandler)
+	http.ListenAndServe(fmt.Sprintf(":%d", configuration.Server.Port), loggingHandler)
 }
 
 func checkErr(err error) {
