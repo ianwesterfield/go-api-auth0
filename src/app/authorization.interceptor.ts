@@ -1,8 +1,6 @@
-import 'rxjs/add/observable/throw';
-import 'rxjs/add/operator/catch';
-import { Observable } from 'rxjs/Rx';
-import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
-import { Injectable, Injector } from '@angular/core';
+import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from "@angular/common/http";
+import { Injectable } from "@angular/core";
+import { Observable } from "rxjs";
 
 @Injectable()
 export class AuthorizationInterceptor implements HttpInterceptor {
@@ -10,7 +8,7 @@ export class AuthorizationInterceptor implements HttpInterceptor {
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     // Clone the request to add the new header.
-    const token = localStorage.getItem('id_token');
+    const token = localStorage.getItem("id_token");
 
     if (!token) {
       return next.handle(req);
@@ -18,8 +16,8 @@ export class AuthorizationInterceptor implements HttpInterceptor {
 
     req = req.clone({
       setHeaders: {
-        'Content-Type': 'application/json; charset=utf-8',
-        Accept: 'application/json',
+        "Content-Type": "application/json; charset=utf-8",
+        Accept: "application/json",
         Authorization: `Bearer ${token}`
       }
     });

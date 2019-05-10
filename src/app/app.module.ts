@@ -1,14 +1,14 @@
+import { AppComponent } from '@app/app.component';
+import { AppRoutingModule } from '@app/app-routing.module';
+import { AuthorizationInterceptor } from '@app/authorization.interceptor';
+import { AuthService } from '@app/auth/auth.service';
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { AppComponent } from './app.component';
-import { HomeComponent } from './home/home.component';
-import { ROUTES } from './app.routes';
-import { AuthService } from './auth/auth.service';
 import { CallbackComponent } from './callback/callback.component';
-import { AuthorizationInterceptor } from './authorization.interceptor';
+import { HomeComponent } from './home/home.component';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { NgModule } from '@angular/core';
+import { RouterModule } from '@angular/router';
+import { ROUTES } from './app.routes';
 
 @NgModule({
   declarations: [
@@ -18,7 +18,7 @@ import { AuthorizationInterceptor } from './authorization.interceptor';
   ],
   imports: [
     BrowserModule,
-    FormsModule,
+    AppRoutingModule,
     HttpClientModule,
     RouterModule.forRoot(ROUTES)
   ],

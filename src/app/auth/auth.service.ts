@@ -1,7 +1,7 @@
-import * as auth0 from 'auth0-js';
+import { AUTH_CONFIG } from './auth0-variables';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { AUTH_CONFIG } from './auth0-variables';
+import * as auth0 from 'auth0-js';
 
 @Injectable()
 export class AuthService {
@@ -36,6 +36,7 @@ export class AuthService {
     const expiresAt = JSON.stringify(
       authResult.expiresIn * 1000 + new Date().getTime()
     );
+    
     localStorage.setItem('access_token', authResult.accessToken);
     localStorage.setItem('id_token', authResult.idToken);
     localStorage.setItem('expires_at', expiresAt);
@@ -48,14 +49,10 @@ export class AuthService {
     localStorage.removeItem('access_token');
     localStorage.removeItem('id_token');
     localStorage.removeItem('expires_at');
-
-    // Go back to the home route
-    // this.router.navigate(['/']);
   }
 
   isAuthenticated(): boolean {
-    // Check whether the current time is past the
-    // access token's expiry time
+    // Check whether the current time is past the access token's expiry time
     const expiresAt = JSON.parse(localStorage.getItem('expires_at') || '{}');
     return new Date().getTime() < expiresAt;
   }

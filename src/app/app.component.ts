@@ -1,20 +1,20 @@
-import 'rxjs/add/operator/take';
-import { HttpClient } from '@angular/common/http';
+import { AuthService } from '@app/auth/auth.service';
 import { Component } from '@angular/core';
-import { AuthService } from './auth/auth.service';
+import { HttpClient } from '@angular/common/http';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
 
-  constructor(public auth: AuthService, private httpClient: HttpClient) {
-    auth.handleAuthentication();
+  constructor(public authService: AuthService, private httpClient: HttpClient) {
+    authService.handleAuthentication();
   }
 
   getStatus() {
-    this.httpClient.get<any>('http://localhost:3000/api/v1/version').take(1).subscribe(result => alert(JSON.stringify(result)));
+    this.httpClient.get<any>('http://localhost:3000/api/v1/version').pipe(take(1)).subscribe(result => alert(JSON.stringify(result)));
   }
 }
