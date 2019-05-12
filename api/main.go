@@ -26,7 +26,7 @@ func main() {
 	checkErr(err)
 
 	// setup database
-	dbInit()
+	// dbInit()
 
 	// setup router
 	r := mux.NewRouter()
